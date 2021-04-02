@@ -2,6 +2,7 @@
 ## Prerequisites
 * npm
 * JDK 8
+* maven
 ## Set up
 * Create your own database with postgres user and import init.sql
 * Edit application.properties in src/main/resources directory according to your database
