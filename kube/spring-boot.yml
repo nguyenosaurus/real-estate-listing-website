@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot
+  template:
+    metadata:
+      labels:
+        app: spring-boot
+    spec:
+      containers:
+        - name: app
+          image: docker-spring-boot-postgres:latest
+          ports:
+            - containerPort: 9000
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/test
+              name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+              name: SPRING_DATASOURCE_PASSWORD
+              value: postgres
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot
+spec:
+  selector:
+    app: spring-boot
+  ports:
+    - port: 9000
+      targetPort: 9000
+  type: NodePort

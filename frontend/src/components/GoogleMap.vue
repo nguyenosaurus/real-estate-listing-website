@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div>
+      <!-- <h2>Search and add a pin</h2>
+      <label>
+        <gmap-autocomplete
+          @place_changed="setPlace">
+        </gmap-autocomplete>
+        <button @click="addMarker">Add</button>
+      </label>
+      <br/> -->
+
+    </div>
     <br>
     <gmap-map
       :center="center"
@@ -34,6 +45,11 @@ export default {
   mounted() {
     this.geolocate();
   },
+  watch: {
+    posts() {
+      this.searchPostInMaps();
+    }
+  },
 
   methods: {
     // nhận địa điểm thông qua autocomplete component
@@ -53,18 +69,23 @@ export default {
       }
     },
     searchPostInMaps() {
+        // console.log(this.posts);
         var p;
+        // this.center = {lat: 10.7896455, lng: 106.7048378};
         this.markers = [];
         var flag = false;
         for (p in this.posts) {
+            // console.log(p);
             if (this.posts[p].address.longitude && this.posts[p].address.latitude) {
                 if (!flag) {
                     this.center = {lat: this.posts[p].address.latitude ,lng: this.posts[p].address.longitude};
                     flag = true;
                 }
+                // var marker = {lat: this.posts[p].address.longitude ,lng: this.posts[p].address.latitude};
                 this.markers.push({position: {lat: this.posts[p].address.latitude ,lng: this.posts[p].address.longitude}});
             }
         }
+        console.log(this.markers);
     },
     geolocate() {
         navigator.geolocation.getCurrentPosition(position => {

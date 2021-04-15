@@ -4,7 +4,7 @@ services:
   app:
     image: 'docker-spring-boot-postgres:latest'
     build:
-      context: .
+      context: ./backend
     container_name: app
     ports:
         - "9000:9000"
@@ -17,11 +17,13 @@ services:
     #   - SPRING_JPA_HIBERNATE_DDL_AUTO=update
           
   db:
-    image: 'postgres:13.1-alpine'
+    image: 'postgres:latest'
+    build:
+      context: ./db
     container_name: db
     volumes:
         - postgres_data:/var/lib/postgresql/data/
-        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
