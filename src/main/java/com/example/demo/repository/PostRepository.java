@@ -11,5 +11,6 @@ import org.springframework.data.repository.query.Param;
 
 @Repository("postRepository")
 public interface PostRepository extends JpaRepository<Post, Integer>, JpaSpecificationExecutor<Post> {
-	
+
+	public Post findById(Long id);
 }

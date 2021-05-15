@@ -28,6 +28,11 @@ public class PostService implements IPostService {
 	private PostRepository postRepository;
 
 	@Override
+	public Post findById(Long id) {
+		return postRepository.findById(id);
+	}
+
+	@Override
 	public Specification<Post> getSpecFromPricesAndExample(
 		Integer lowerPrice, Integer upperPrice, Integer lowerArea, Integer upperArea, Example<Post> example) {
 

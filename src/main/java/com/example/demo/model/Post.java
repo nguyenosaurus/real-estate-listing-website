@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.Objects;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,19 +12,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "post")
 public class Post implements java.io.Serializable{
 
     private String url;
+    private Long id;
     private Float price;
     private String price_unit;
     private Float area;
     private String num_bedrooms;
     private String num_bathrooms;
-    private String created_date;
-    private String expired_date;
+    @Column(name="created_date")
+    private Date createdDate;
+    @Column(name="expired_date")
+    private Date expiredDate;
     private String num_floors;
     private String floorth;
     private String direction;
@@ -43,8 +48,6 @@ public class Post implements java.io.Serializable{
     public Post() {
     }
 
-    @Id
-	@GeneratedValue(strategy = IDENTITY)
 	public String getUrl() {
 		return this.url;
 	}
@@ -52,6 +55,16 @@ public class Post implements java.io.Serializable{
     public void setUrl(String url) {
 		this.url = url;
 	}
+
+    @Id
+	@GeneratedValue(strategy = IDENTITY)
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Float getPrice() {
         return this.price;
@@ -93,20 +106,20 @@ public class Post implements java.io.Serializable{
         this.num_bathrooms = num_bathrooms;
     }
 
-    public String getCreated_date() {
-        return this.created_date;
+    public Date getCreatedDate() {
+        return this.createdDate;
     }
 
-    public void setCreated_date(String created_date) {
-        this.created_date = created_date;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getExpired_date() {
-        return this.expired_date;
+    public Date getExpiredDate() {
+        return this.expiredDate;
     }
 
-    public void setExpired_date(String expired_date) {
-        this.expired_date = expired_date;
+    public void setExpiredDate(Date expiredDate) {
+        this.expiredDate = expiredDate;
     }
 
     public String getNum_floors() {

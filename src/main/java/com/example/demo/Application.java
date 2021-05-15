@@ -9,6 +9,7 @@ import java.util.Collections;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.core.Ordered;
 import org.springframework.context.annotation.Bean;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class Application {
@@ -23,7 +24,8 @@ public class Application {
         CorsConfiguration config = new CorsConfiguration();  
         config.setAllowCredentials(true); 
         // *** URL below needs to match the Vue client URL and port ***
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:8080")); 
+        // config.setAllowedOrigins(Collections.singletonList("http://localhost:9527")); 
+        config.setAllowedOrigins(Arrays.asList("http://localhost:9527","http://localhost:8080")); 
         config.setAllowedMethods(Collections.singletonList("*"));  
         config.setAllowedHeaders(Collections.singletonList("*"));  
         source.registerCorsConfiguration("/**", config);  
